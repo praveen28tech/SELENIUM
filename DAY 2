@@ -1,0 +1,42 @@
+package assignments;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class LocateSample {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		
+	String url="https://www.tutorialspoint.com/selenium/practice/text-box.php";
+	
+	WebDriver driver = new ChromeDriver();
+	
+	driver.get(url);
+	driver.manage().window().fullscreen();
+	Thread.sleep(1000);
+	
+	WebElement fullname=driver.findElement(By.cssSelector("input[id='fullname']"));
+	fullname.sendKeys("Praveen");
+	Thread.sleep(500);
+	WebElement email=driver.findElement(By.id("email"));
+	email.sendKeys("Praveen28@gmail.com");
+	Thread.sleep(500);
+	WebElement address=driver.findElement(By.id("address"));
+	address.sendKeys("Ram Nagar 6th main road ,Madipakkam  chennai - 600091");
+	Thread.sleep(500);
+	WebElement password=driver.findElement(By.id("password"));
+	password.sendKeys("praveen28@gmail.com");
+	Thread.sleep(500);
+	WebElement Submit=driver.findElement(By.cssSelector("input[type='submit']"));
+	Thread.sleep(500);
+	Submit.click();
+	
+	driver.close();
+	
+	
+	}
+
+}
