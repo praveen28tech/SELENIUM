@@ -1,0 +1,41 @@
+ 1. Why we cannot automate CAPTCHA using selenium?
+
+CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart) is designed to prevent automated scripts, including Selenium, from accessing a website. 
+CAPTCHA uses advanced algorithms to generate distorted images or audio that are difficult for machines to decipher, but easy for humans to recognize. 
+Selenium can't automate CAPTCHA because it's meant to distinguish humans from bots.
+
+2. Write a program to open Opera browser
+
+package seleniumpractice;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.opera.OperaDriver;
+
+public class Main {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.opera.driver", "/path/to/operadriver");
+        WebDriver driver = new OperaDriver();
+        driver.get("https://www.google.com");
+    }
+}
+
+
+
+3. What is the difference between driver.quit() and driver.close()
+
+driver.close() : Closes the current browser window.
+driver.quit() : Closes all browser windows and terminates the WebDriver session.
+
+
+
+4.Explain about WebDriver driver = new ChromeDriver(). Why we assign the Object of chrome driver to webdriver reference?
+
+WebDriver driver = new ChromeDriver(); is an example of polymorphism in Java.  
+ChromeDriver is a concrete implementation of the WebDriver  interface. 
+By assigning a ChromeDriver object to a WebDriver reference, you can: Switch to different browsers (e.g., Firefox, Edge) without changing the code.
+
+Write generic code that works with any browser.
+
+Example:
+WebDriver driver = new ChromeDriver();
+// or
+WebDriver driver = new FirefoxDriver();
