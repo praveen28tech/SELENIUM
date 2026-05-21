@@ -1,0 +1,47 @@
+
+Navigate to http://uitestingplayground.com/autowait
+Click "Apply 5s" button given
+Click the blue "Button" after the wait time
+
+package practicetest;
+
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+
+public class Synchronization {
+
+	public static void main(String[] args) {
+	
+		// TODO Auto-generated method stub
+		String url ="http://uitestingplayground.com/autowait";
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.get(url);
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        driver.findElement(By.id("applyButton5")).click();
+
+        WebElement button = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("target")));
+
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+
+        button.click();
+       
+        driver.close ();
+		
+		
+		
+		
+	}
+
+}
