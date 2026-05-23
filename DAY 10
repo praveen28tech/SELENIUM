@@ -1,0 +1,104 @@
+Mini Project Assignment
+
+Navigate to https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login
+Automate "Bank Manager Login" flow
+
+Note: U have to first "Add Customer" details to "Open Account" where u can select the newly added customer. Then u can view that in "Customers" section
+
+So create seperate methods and call it from main method.
+
+
+package assignments;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class MiniProject {
+	
+	
+	WebDriver driver;
+	String url;
+	WebElement firstName,lastName,postCode,dropdown, currency, table;
+	Alert popup;
+
+	
+	void lauchSite() {
+		
+	String url ="https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login";
+	driver = new ChromeDriver();
+	driver.get(url);
+	driver.manage().window().fullscreen();
+	System.out.println("Website launched");
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		
+	}
+
+	
+	void addCustomer() {
+		
+	driver.findElement(By.xpath("//button[text()='Bank Manager Login']")).click();
+	driver.findElement(By.cssSelector("button[ng-click='addCust()']")).click();
+	firstName = driver.findElement(By.xpath("//div[1]/input"));
+	lastName = driver.findElement(By.xpath("//div[2]/input"));
+	postCode = driver.findElement(By.xpath("//div[3]/input"));
+	firstName.sendKeys("Praveen");
+	lastName.sendKeys("Venkatesh");
+	postCode.sendKeys("600091");
+	driver.findElement(By.cssSelector("button[type='submit']")).click();
+	popup = driver.switchTo().alert();
+	popup.accept();
+	System.out.println("New customer added");
+	
+	}
+	
+	void OpenAcc() {
+		
+	driver.findElement(By.cssSelector("button[ng-click='openAccount()']")).click();	
+	dropdown = driver.findElement(By.id("userSelect"));
+	Select selectOpt = new Select(dropdown);
+	selectOpt.selectByVisibleText("Praveen Venkatesh");
+	currency = driver.findElement(By.id("currency"));
+	Select selectCur = new Select(currency);
+	selectCur.selectByValue("Rupee");
+	driver.findElement(By.cssSelector("button[type='submit']")).click();
+	popup.accept();
+	System.out.println("Account opened");
+	
+	}
+	
+  public void customer() {
+		
+		driver.findElement(By.cssSelector("button[ng-click='showCust()']")).click();
+		table = driver.findElement(By.tagName("table"));
+		List<WebElement> row = table.findElements(By.tagName("tr"));
+
+		for (WebElement rows:row) {
+			List<WebElement> data = rows.findElements(By.tagName("td"));
+			for(WebElement datas:data) {
+				System.out.print(datas.getText()+ "  ");
+			}
+			System.out.println();
+		}
+	}
+    
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MiniProject mini = new MiniProject();
+		mini.lauchSite();
+		mini.addCustomer();
+		mini.OpenAcc();
+		mini.customer();
+		
+	
+	}
+
+}
+
